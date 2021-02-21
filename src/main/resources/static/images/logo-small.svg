@@ -1,0 +1,63 @@
+<svg class="canvas" height="166" width="172" xmlns="http://www.w3.org/2000/svg">
+  <g>
+    <title>background</title>
+    <rect fill="none" height="267" id="canvas_background" width="174" x="-1" y="-1"/>
+  </g>
+
+  <g>
+    <title>Layer 1</title>
+    <g id="svg-engine">
+      <!-- ngRepeat: shape in logo.shapes   | orderBy:'zindex' -->
+      <!-- ngIf: $root.removeAll != true -->
+      <g class="ng-scope" id="svg_1">
+        <!-- ngIf: shape.type == 'text' -->
+        <!-- ngIf: shape.type == 'logo' || shape.type == 'shape' -->
+        <g class="logo-item ng-scope" id="shape-3"
+          transform="translate(716.5637817382812,215.1839599609375) scale(1.9824824333190918) ">
+          <g class="svg-item ng-pristine ng-untouched ng-valid ng-isolate-scope ng-not-empty" id="svg_2">
+            <path class="ng-scope"
+              d="m-283.20972,-45.18868l-0.795,1.988l-1.871,-0.482l-0.634,1.652l-1.771,-0.6l-0.614,1.604l-1.771,-0.6l-0.738,1.715l-1.619,-0.645l-0.748,1.602l-1.65,-0.633l-0.816,2.131l-1.725,-0.689l-0.716,1.699l-1.54,-0.615l-0.713,1.785l-1.604,-0.639l-0.691,1.727l-1.762,-0.42l-1.059,1.223l-2.975,-6.693l-0.296,-0.154l22.657,-19.29a5.882,5.882 0 0 0 -1.953,-0.336l-22.256,0c-3.352,0 -6.068,2.791 -6.068,6.236l0,22.072c0,3.445 2.717,6.236 6.068,6.236l22.256,0c3.352,0 6.069,-2.791 6.069,-6.236l0,-13.363l-0.665,-0.275z"
+              fill="#d91f26" id="PATH_3_0"/>
+            <path class="ng-scope"
+              d="m-325.30472,-59.85868l-22.255,0a5.924,5.924 0 0 0 -3.604,1.227l7.837,4.709c0.403,0.24 0.488,0.834 0.197,1.32l-0.631,1.051c0.06,0.021 0.116,0.047 0.172,0.08l2.419,1.525c0.35,0.223 0.49,0.666 0.329,1.049l-5.253,12.496l4.813,2.738l0.796,-1.479l-2.313,-1.266c-0.413,-0.225 -0.575,-0.721 -0.362,-1.111l9.667,-17.678c0.211,-0.391 0.717,-0.523 1.13,-0.297l6.711,3.67c0.413,0.225 0.574,0.721 0.359,1.109l-9.663,17.68c-0.213,0.389 -0.719,0.521 -1.13,0.297l-2.907,-1.588l-1.204,2.234a0.85,0.85 0 0 1 -0.514,0.412c-0.001,0.002 -0.002,0.002 -0.003,0.002a0.862,0.862 0 0 1 -0.649,-0.078l-6.226,-3.541a0.85,0.85 0 0 1 -0.365,-1.068l5.268,-12.527l-1.809,-1.143a0.87,0.87 0 0 1 -0.125,-0.094l-0.702,1.168c-0.292,0.488 -0.855,0.688 -1.259,0.445l-7.05,-4.238l0,21.203c0,3.445 2.718,6.238 6.069,6.238l22.255,0c3.351,0 6.068,-2.793 6.068,-6.238l0,-22.071c0.002,-3.443 -2.715,-6.236 -6.066,-6.236m23.21,-14.83c-1.447,-0.883 -2.188,-4.158 1.083,-5.012c1.236,-0.479 1.573,-0.998 1.573,-0.998l-4.419,-3.117l-4.499,6.506s-3.626,-4.213 -1.396,-8.092c2.228,-3.879 6.512,-5.74 12.6,-0.41c-1.166,1.875 -1.53,2.619 -1.53,2.619l0.814,0.35l1.732,-2.367l4.783,3.006l-3.203,5.436l3.019,1.93l3.396,-5.051l1.254,0.684s-1.525,2.584 -2.027,3.688c-0.538,1.186 0.22,2.477 2.214,3.84c0.444,0.305 2.117,1.373 4.475,2.875l0,-4.584c-0.777,0.867 -1.846,1.619 -3.004,1.195c-2.143,-0.779 -2.604,-2.217 -2.479,-3.152s1.689,-3.174 1.689,-3.174l3.793,2.486l0,-5.668l7.979,0l-7.979,-4.975l-13.262,-8.271l-21.804,-13.598l0.673,0.738l0,39.563c0,3.445 2.717,6.238 6.069,6.238l22.255,0a5.94,5.94 0 0 0 3.619,-1.238c-4.923,-3.238 -16.111,-10.647 -17.418,-11.447m13.373,-5.752l-2.844,4.516l-1.938,-1.219l2.846,-4.518l1.936,1.221z"
+              fill="#231f20" id="PATH_3_1"/>
+            <path class="ng-scope"
+              d="m-330.97172,-100.70468l0,-4.92l-11.08,0l0,11.828l-11.42,7.121l-7.976,4.975l7.977,0l0,12.637c6.824,-5.434 12.386,-9.877 13.236,-10.602c2.39,-2.033 4.67,-3.252 2.573,-4.875c-2.097,-1.621 -6.083,-1.994 -8.438,-2.236c-2.352,-0.238 -1.616,-0.953 -1.616,-0.953c11.503,-3.326 18.936,4.469 19.23,6.768c-0.235,2.941 1.745,3.881 2.697,4.166c0.634,-0.209 1.337,-0.051 1.769,0.459l0.951,1.115c0.586,0.691 0.459,1.76 -0.283,2.391l-2.799,2.379c-0.744,0.633 -1.82,0.584 -2.405,-0.104l-0.951,-1.119c-0.434,-0.51 -0.474,-1.223 -0.168,-1.816c-0.846,-4.205 -4.907,-2.893 -4.907,-2.893s-1.179,0.822 -3.299,2.445c-0.773,0.59 -6.369,5.145 -13.156,10.684a5.925,5.925 0 0 0 3.636,1.252l22.254,0c3.352,0 6.069,-2.793 6.069,-6.238l0,-39.564l0.672,-0.738l-12.566,7.838z"
+              fill="#d91f26" id="PATH_3_2"/>
+          </g>
+        </g>
+        <!-- end ngIf: shape.type == 'logo' || shape.type == 'shape' -->
+      </g>
+      <!-- end ngIf: $root.removeAll != true -->
+      <!-- end ngRepeat: shape in logo.shapes   | orderBy:'zindex' -->
+      <!-- ngIf: $root.removeAll != true -->
+      <g class="ng-scope" id="svg_3">
+        <!-- ngIf: shape.type == 'text' -->
+        <g class="contenteditable logo-item ng-pristine ng-untouched ng-valid ng-scope ng-not-empty" id="shape-1"
+          transform="translate(727.6953125,435.6839904785156) scale(1) ">
+          <!-- ngIf: shape.type == 'text' -->
+          <text class="real-text ng-binding ng-scope" fill="#d91f26" font-family="Qlassik Bold" font-size="62px" id="text-1" x="-716.56378" y="-215.18396" xml:space="preserve">CIGMA</text>
+          <!-- end ngIf: shape.type == 'text' -->
+        </g>
+        <!-- end ngIf: shape.type == 'text' -->
+        <!-- ngIf: shape.type == 'logo' || shape.type == 'shape' -->
+      </g>
+      <!-- end ngIf: $root.removeAll != true -->
+      <!-- end ngRepeat: shape in logo.shapes   | orderBy:'zindex' -->
+      <!-- ngIf: $root.removeAll != true -->
+      <g class="ng-scope" id="svg_4">
+        <!-- ngIf: shape.type == 'text' -->
+        <g class="contenteditable logo-item ng-pristine ng-untouched ng-valid ng-scope ng-not-empty" id="shape-2"
+          transform="translate(772.71875,469.9097900390625) scale(1) ">
+          <!-- ngIf: shape.type == 'text' -->
+          <text class="real-text ng-binding ng-scope" fill="#231f20" font-family="Qlassik Bold" font-size="34px" id="text-2" x="-716.56378" y="-215.18396" xml:space="preserve">Shop</text>
+          <!-- end ngIf: shape.type == 'text' -->
+        </g>
+        <!-- end ngIf: shape.type == 'text' -->
+        <!-- ngIf: shape.type == 'logo' || shape.type == 'shape' -->
+      </g>
+      <!-- end ngIf: $root.removeAll != true -->
+      <!-- end ngRepeat: shape in logo.shapes   | orderBy:'zindex' -->
+    </g>
+  </g>
+</svg>

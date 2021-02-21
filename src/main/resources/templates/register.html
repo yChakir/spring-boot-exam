@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+  <link rel="stylesheet" th:href="@{/css/application.css}"/>
+  <title>CIGMA Shop - Inscription</title>
+</head>
+<body>
+<div class="min-h-screen flex flex-col">
+  <div class="flex flex-col flex-grow items-center md:justify-center md:bg-gray-50">
+    <div class="h-24 z-0 bg-white md:bg-transparent w-full">
+      <img class="mx-auto h-48" th:src="@{/images/logo.svg}">
+    </div>
+    <div class="md:max-w-md w-full bg-white rounded-md p-8 space-y-8 md:shadow-md pt-24">
+      <h2 class="text-center text-3xl mt-6 font-extrabold text-gray-900">Inscription</h2>
+      <form class="max-w-md w-full mx-auto flex flex-col item-center justiry-center space-y-4"
+            th:action="@{/passport/register}"
+            th:object="${user}"
+            method="POST">
+        <div>
+          <label for="fullName" class="sr-only">Nom et prénom</label>
+          <input id="fullName" name="fullName" type="text" autocomplete="fullName"
+                 placeholder="Nom et prénom" th:field="*{fullName}"
+                 class="appearance-none rounded-md shadow-sm block w-full h-10 p-3 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-red-500 focus:border-red-500"
+          >
+          <div class="text-sm mx-2 text-red-700"
+               th:each="error: ${#fields.errors('fullName')}"
+               th:text="${error}">Erreur de validation
+          </div>
+        </div>
+        <div>
+          <label for="username" class="sr-only">Nom d'utilisateur</label>
+          <input id="username" name="username" type="text" autocomplete="username"
+                 placeholder="Nom d'utilisateur" th:field="*{username}"
+                 class="appearance-none rounded-md shadow-sm block w-full h-10 p-3 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-red-500 focus:border-red-500"
+          >
+          <div class="text-sm mx-2 text-red-700"
+               th:each="error: ${#fields.errors('username')}"
+               th:text="${error}">Erreur de validation
+          </div>
+        </div>
+        <div>
+          <label for="email" class="sr-only">Adresse mail</label>
+          <input id="email" name="email" type="email" autocomplete="email"
+                 placeholder="Adresse mail" th:field="*{email}"
+                 class="appearance-none rounded-md shadow-sm block w-full h-10 p-3 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-red-500 focus:border-red-500"
+          >
+          <div class="text-sm mx-2 text-red-700"
+               th:each="error: ${#fields.errors('email')}"
+               th:text="${error}">Erreur de validation
+          </div>
+        </div>
+        <div>
+          <label for="city" class="sr-only">Ville</label>
+          <input id="city" name="city" type="text" autocomplete="city"
+                 placeholder="Ville" th:field="*{city}"
+                 class="appearance-none rounded-md shadow-sm block w-full h-10 p-3 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-red-500 focus:border-red-500"
+          >
+          <div class="text-sm mx-2 text-red-700"
+               th:each="error: ${#fields.errors('city')}"
+               th:text="${error}">Erreur de validation
+          </div>
+        </div>
+        <div>
+          <label for="tel" class="sr-only">Téléphone</label>
+          <div class="flex">
+            <div
+                class="text-center bg-gray-100 rounded-l-md shadow-sm block h-10 px-4 p-2 border border-r-0 border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-red-500 focus:border-red-500">
+              +212
+            </div>
+            <input id="tel" name="tel" type="text" autocomplete="tel"
+                   placeholder="Téléphone" th:field="*{tel}"
+                   class="appearance-none rounded-r-md shadow-sm block w-full h-10 p-3 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-red-500 focus:border-red-500"
+            >
+          </div>
+          <div class="text-sm mx-2 text-red-700"
+               th:each="error: ${#fields.errors('tel')}"
+               th:text="${error}">Erreur de validation
+          </div>
+        </div>
+        <div class="text-center text-red-700" th:if="${param.error}">
+          Mot de passe incorrect
+        </div>
+        <div class="text-right text-red-700 underline">
+          <a th:href="@{/passport/login}">S'authentifier ?</a>
+        </div>
+        <div>
+          <button class="block w-full bg-red-600 hover:bg-red-700 text-white rounded-md h-10" type="submit">
+            S’inscrire
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div th:replace="fragments/footer :: simple">/div>
+  </div>
+</body>
+</html>
