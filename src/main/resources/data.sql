@@ -22,3 +22,7 @@ VALUES ('Casablanca',
 INSERT INTO user_roles (user_id, roles_id)
 VALUES ((SELECT ID FROM user WHERE username = 'admin'), (SELECT ID FROM role WHERE name = 'ADMIN')),
        ((SELECT ID FROM user WHERE username = 'client'), (SELECT ID FROM role WHERE name = 'CLIENT'));
+
+-- articles
+INSERT INTO article (price, reference, title)
+VALUES (1212, '8EUUF99E0', 'Article de test');
