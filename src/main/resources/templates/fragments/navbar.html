@@ -15,10 +15,18 @@
         </div>
         <div class="hidden md:block">
           <div class="ml-10 flex items-baseline space-x-4">
-            <a href="#" class="bg-red-600 hover:bg-red-700 text-white px-3 py-2 rounded-md text-sm font-medium">Recherche
+            <a th:if="${menu == 1}" href="#"
+               class="bg-red-600 hover:bg-red-700 text-white px-3 py-2 rounded-md text-sm font-medium">Recherche
+              des articles</a>
+            <a th:if="${menu != 1}" href="#"
+               class="text-gray-600 hover:bg-red-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Recherche
               des articles</a>
 
-            <a href="#" class="text-gray-600 hover:bg-red-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+            <a th:if="${menu == 2}" th:href="@{/articles/article-management}"
+               class="bg-red-600 hover:bg-red-700 text-white px-3 py-2 rounded-md text-sm font-medium"
+               sec:authorize="hasAuthority('ADMIN')">Gestion des articles</a>
+            <a th:if="${menu != 2}" th:href="@{/articles/article-management}"
+               class="text-gray-600 hover:bg-red-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
                sec:authorize="hasAuthority('ADMIN')">Gestion des articles</a>
           </div>
         </div>
