@@ -1,7 +1,7 @@
 package org.cigma.ychakir.springbootexam.model;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -12,18 +12,17 @@ import lombok.NoArgsConstructor;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "articles")
+@Table(name = "orders")
 @EqualsAndHashCode(callSuper = true)
-public class Article extends BaseModel {
+public class Order extends BaseModel {
 
-  @Column(unique = true)
-  private String reference;
+  @ManyToOne
+  private User user;
 
-  private String title;
-
-  private String description;
+  @ManyToOne
+  private Article article;
 
   private Long quantity;
 
-  private Double price;
+  private OrderStatus status;
 }

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+  <link rel="stylesheet" th:href="@{/css/application.css}"/>
+  <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+  <script th:src="@{/js/alpine.min.js}" defer></script>
+  <title>CIGMA Shop - Gestion des articles</title>
+</head>
+<body class="overflow-y-hidden">
+<div class="min-h-screen flex flex-col">
+  <div class="flex flex-col flex-grow" x-data="{ isMobileMenuOn: false }">
+    <div th:replace="fragments/navbar :: navbar(menu = 1)"></div>
+    <div th:replace="fragments/header :: header(title = 'Information de l\'article')"></div>
+    <main class="flex flex-col flex-grow items-center bg-gray-50">
+      <div class="flex-grow bg-white max-w-6xl w-full h-64 mx-auto p-8 overflow-y-auto">
+
+        <div class="flex items-center justify-center">
+          <div
+              class="m-4 max-w-sm text-center w-full rounded-md border border-green-300 bg-green-100 p-2 px-4 flex flex-col text-green-700"
+              th:if="${param.success}">
+            Article ajouté au panier avec succès !
+          </div>
+        </div>
+        <div class="bg-white shadow overflow-hidden sm:rounded-lg">
+          <div class="px-4 py-5 sm:px-6">
+            <h3 class="text-lg leading-6 font-medium text-gray-900" th:text="${article.title}"></h3>
+            <p class="mt-1 max-w-2xl text-sm text-gray-500" th:text="${article.description}">
+              description
+            </p>
+          </div>
+          <div class="border-t border-gray-200">
+            <dl>
+              <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                <dt class="text-sm font-medium text-gray-500">
+                  Reference
+                </dt>
+                <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2" th:text="${article.reference}"></dd>
+              </div>
+              <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                <dt class="text-sm font-medium text-gray-500">
+                  Price
+                </dt>
+                <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2" th:text="${article.price}"></dd>
+              </div>
+            </dl>
+          </div>
+        </div>
+
+        <div class="m-4">
+          <form class="w-full flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 justify-end"
+                th:action="@{/orders/add-to-cart/{id} (id = ${article.id})}" method="POST"
+                th:object="${order}"
+          >
+            <div>
+              <label for="quantity" class="sr-only">Quantité</label>
+              <input id="quantity" name="quantity" type="text" autocomplete="quantity"
+                     placeholder="Quantité" th:field="*{quantity}"
+                     class="appearance-none rounded-md shadow-sm block w-full h-10 p-3 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-red-500 focus:border-red-500"
+              >
+              <div class="text-sm mx-2 text-red-700"
+                   th:each="error: ${#fields.errors('quantity')}"
+                   th:text="${error}">Erreur de validation
+              </div>
+            </div>
+            <div>
+              <button class="block w-full bg-red-600 hover:bg-red-700 text-white rounded-md h-10 px-8" type="submit">
+                Ajouter au panier
+              </button>
+            </div>
+          </form>
+        </div>
+
+      </div>
+    </main>
+  </div>
+  <div th:replace="fragments/footer :: simple"></div>
+</div>
+</body>
+</html>

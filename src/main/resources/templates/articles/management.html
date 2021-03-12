@@ -5,22 +5,16 @@
   <script th:src="@{/js/alpine.min.js}" defer></script>
   <title>CIGMA Shop - Changer Votre mot de passe</title>
 </head>
-<body>
+<body class="overflow-y-hidden">
 <div class="min-h-screen flex flex-col">
   <div class="flex flex-col flex-grow" x-data="{ isMobileMenuOn: false }">
     <div th:replace="fragments/navbar :: navbar(menu = 2)"></div>
-    <header class="bg-white shadow">
-      <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-        <h1 class="text-3xl font-bold text-gray-900">
-          Gestion des articles
-        </h1>
-      </div>
-    </header>
+    <div th:replace="fragments/header :: header(title = 'Gestion des articles')"></div>
     <main class="flex flex-col flex-grow items-center bg-gray-50">
-      <div class="flex-grow bg-white max-w-6xl w-full h-64 mx-auto p-8">
+      <div class="flex-grow bg-white max-w-6xl w-full h-64 mx-auto p-8 overflow-y-auto">
         <div class="flex flex-col">
           <div class="flex flex-row-reverse">
-            <a th:href="@{/articles/article-management?new}"
+            <a th:href="@{/articles/management?new}"
                class="my-4 px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-md text-sm">
               Ajouter nouvel article
             </a>
@@ -31,12 +25,15 @@
                 th:if="${param.delete}">
               Article supprimé avec succès !
             </div>
-          </div>
-          <div class="flex items-center justify-center">
             <div
                 class="m-4 max-w-sm text-center w-full rounded-md border border-green-300 bg-green-100 p-2 px-4 flex flex-col text-green-700"
                 th:if="${param.success}">
               Article sauvegardé avec succès !
+            </div>
+            <div
+                class="m-4 max-w-sm text-center w-full rounded-md border border-red-300 bg-red-100 p-2 px-4 flex flex-col text-red-700"
+                th:if="${param.alreadyOrdered}">
+              Impossible de supprimé un article déjà commandé !
             </div>
           </div>
           <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -55,6 +52,10 @@
                     </th>
                     <th scope="col"
                         class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      Quntité
+                    </th>
+                    <th scope="col"
+                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                       Prix
                     </th>
                     <th scope="col" class="relative px-6 py-3">
@@ -66,27 +67,36 @@
                   <tr th:each="article: ${articles}">
                     <td class="px-6 py-4 whitespace-nowrap">
                       <div class="text-sm font-medium text-gray-900" th:text="${article.reference}">
-                        91283KJ82
+                        REFERENCE
                       </div>
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap">
                       <div class="text-sm text-gray-900" th:text="${article.title}">
-                        Regional Paradigm Technician
+                        TITLE
                       </div>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                      <span
+                          class="px-2 inline-flex text-xs leading-5 font-semibold text-gray-900"
+                          th:text="${article.quantity}">
+                        QUANTITY
+                      </span>
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap">
                       <span
                           class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800"
                           th:text="${article.price}">
-                        12.4
+                        PRICE
                       </span>
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                      <a th:href="@{/articles/article-management/{id}(id=${article.id})}"
+                      <a th:href="@{/articles/management/{id}(id=${article.id})}"
                          class="text-yellow-600 hover:text-yellow-700">Modifier</a>
                       <a class="text-indigo-200">|</a>
-                      <a th:href="@{/articles/article-management/delete/{id}(id=${article.id})}"
-                         class="text-red-600 hover:text-red-700">Supprimer</a>
+                      <form class="inline-block" th:method="DELETE"
+                            th:action="@{/articles/management/{id}(id=${article.id})}">
+                        <button class="text-red-600 hover:text-red-700">Supprimer</button>
+                      </form>
                     </td>
                   </tr>
                   <tr th:if="${#lists.isEmpty(articles)}">
@@ -102,7 +112,7 @@
           <div th:if="${article.id}">
             <h2 class="text-center text-3xl mt-6 font-extrabold text-gray-900">Edition</h2>
             <form class="max-w-md w-full mx-auto flex flex-col item-center justiry-center space-y-4"
-                  th:action="@{/articles/article-management/{id} (id=${article.id})}"
+                  th:action="@{/articles/management/{id} (id=${article.id})}"
                   th:object="${article}"
                   method="POST">
               <div>
@@ -128,6 +138,28 @@
                 </div>
               </div>
               <div>
+                <label for="quantity" class="sr-only">Quntité</label>
+                <input id="quantity" name="quantity" type="text" autocomplete="quantity"
+                       placeholder="Quantité" th:field="*{quantity}"
+                       class="appearance-none rounded-md shadow-sm block w-full h-10 p-3 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-red-500 focus:border-red-500"
+                >
+                <div class="text-sm mx-2 text-red-700"
+                     th:each="error: ${#fields.errors('quantity')}"
+                     th:text="${error}">Erreur de validation
+                </div>
+              </div>
+              <div>
+                <label for="description" class="sr-only">Déscription</label>
+                <textarea id="description" rows="4" name="description" autocomplete="description"
+                          placeholder="Déscription" th:field="*{description}"
+                          class="appearance-none rounded-md shadow-sm block w-full p-3 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-red-500 focus:border-red-500"
+                ></textarea>
+                <div class="text-sm mx-2 text-red-700"
+                     th:each="error: ${#fields.errors('description')}"
+                     th:text="${error}">Erreur de validation
+                </div>
+              </div>
+              <div>
                 <label for="price" class="sr-only">Prix</label>
                 <input id="price" name="price" type="text" autocomplete="price"
                        placeholder="Prix" th:field="*{price}"
@@ -149,7 +181,7 @@
         <div th:if="${param.new}">
           <h2 class="text-center text-3xl mt-6 font-extrabold text-gray-900">Ajout</h2>
           <form class="max-w-md w-full mx-auto flex flex-col item-center justiry-center space-y-4"
-                th:action="@{/articles/article-management}"
+                th:action="@{/articles/management}"
                 th:object="${article}"
                 method="POST">
             <div>
@@ -175,6 +207,28 @@
               </div>
             </div>
             <div>
+              <label for="description" class="sr-only">Déscription</label>
+              <textarea id="description" rows="4" name="description" autocomplete="description"
+                        placeholder="Déscription" th:field="*{description}"
+                        class="appearance-none rounded-md shadow-sm block w-full p-3 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-red-500 focus:border-red-500"
+              ></textarea>
+              <div class="text-sm mx-2 text-red-700"
+                   th:each="error: ${#fields.errors('description')}"
+                   th:text="${error}">Erreur de validation
+              </div>
+            </div>
+            <div>
+              <label for="quantity" class="sr-only">Quntité</label>
+              <input id="quantity" name="quantity" type="text" autocomplete="quantity"
+                     placeholder="Quantité" th:field="*{quantity}"
+                     class="appearance-none rounded-md shadow-sm block w-full h-10 p-3 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-red-500 focus:border-red-500"
+              >
+              <div class="text-sm mx-2 text-red-700"
+                   th:each="error: ${#fields.errors('quantity')}"
+                   th:text="${error}">Erreur de validation
+              </div>
+            </div>
+            <div>
               <label for="price" class="sr-only">Prix</label>
               <input id="price" name="price" type="text" autocomplete="price"
                      placeholder="Prix" th:field="*{price}"
@@ -193,10 +247,9 @@
           </form>
         </div>
       </div>
+    </main>
   </div>
-  </main>
-</div>
-<div th:replace="fragments/footer :: simple"></div>
+  <div th:replace="fragments/footer :: simple"></div>
 </div>
 </body>
 </html>

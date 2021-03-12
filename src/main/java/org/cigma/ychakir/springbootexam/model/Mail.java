@@ -11,10 +11,10 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Data
-@Table
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
+@Table(name = "mails")
 @EqualsAndHashCode(callSuper = true)
 public class Mail extends BaseModel {
 

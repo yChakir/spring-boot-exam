@@ -1,19 +1,18 @@
 package org.cigma.ychakir.springbootexam.event;
 
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.ToString;
-import lombok.ToString.Exclude;
+import org.cigma.ychakir.springbootexam.model.Order;
 import org.cigma.ychakir.springbootexam.model.User;
 
 @Getter
 @ToString
 @AllArgsConstructor
-public class RegistrationEvent {
+public class InvoiceEvent {
 
   private User user;
 
-  @Exclude
-  private String password;
-
+  private List<Order> orders;
 }

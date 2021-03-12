@@ -15,4 +15,8 @@ public interface ArticleService {
   Optional<Article> findByReference(String reference);
 
   void deleteById(Long id);
+
+  List<Article> search(String contains, String start, String end);
+
+  void saveAll(List<Article> collect);
 }

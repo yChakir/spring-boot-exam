@@ -19,10 +19,10 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 @Data
-@Table
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
+@Table(name = "users")
 @EqualsAndHashCode(callSuper = true)
 public class User extends BaseModel implements UserDetails {
 

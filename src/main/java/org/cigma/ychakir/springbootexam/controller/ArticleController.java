@@ -7,11 +7,15 @@ import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.cigma.ychakir.springbootexam.model.Article;
 import org.cigma.ychakir.springbootexam.service.ArticleService;
+import org.cigma.ychakir.springbootexam.service.OrderService;
 import org.cigma.ychakir.springbootexam.vo.ArticleVo;
+import org.cigma.ychakir.springbootexam.vo.OrderVo;
+import org.cigma.ychakir.springbootexam.vo.SearchVo;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,6 +30,8 @@ public class ArticleController {
 
   private final ArticleService articleService;
 
+  private final OrderService orderService;
+
   private final ModelMapper modelMapper;
 
   @ModelAttribute("article")
@@ -33,7 +39,17 @@ public class ArticleController {
     return new ArticleVo();
   }
 
-  @GetMapping({"article-management", "article-management/{id}"})
+  @ModelAttribute("search")
+  public SearchVo searchVo() {
+    return new SearchVo();
+  }
+
+  @ModelAttribute("order")
+  public OrderVo orderVo() {
+    return new OrderVo();
+  }
+
+  @GetMapping({"management", "management/{id}"})
   public String articleManagement(@PathVariable(required = false) Long id, Model model) {
     final List<ArticleVo> articles = articleService.findAll().stream()
         .map(article -> modelMapper.map(article, ArticleVo.class))
@@ -56,34 +72,60 @@ public class ArticleController {
       }
     }
 
-    return "article-management";
+    return "articles/management";
   }
 
-  @PostMapping("article-management/{id}")
+  @GetMapping("search")
+  public String search(Model model) {
+    final List<ArticleVo> articles = articleService.findAll().stream()
+        .map(article -> modelMapper.map(article, ArticleVo.class))
+        .collect(Collectors.toList());
+
+    model.addAttribute("articles", articles);
+
+    return "articles/search";
+  }
+
+  @PostMapping("search")
+  public String search(@ModelAttribute @Valid SearchVo searchVo, Model model) {
+    List<ArticleVo> articles = articleService.search(searchVo.getContains(), searchVo.getStart(), searchVo.getEnd()).stream()
+        .map(article -> modelMapper.map(article, ArticleVo.class))
+        .collect(Collectors.toList());
+
+    model.addAttribute("search", searchVo);
+    model.addAttribute("articles", articles);
+    return "articles/search";
+  }
+
+  @PostMapping("management/{id}")
   public String edit(@PathVariable Long id, @ModelAttribute("article") @Valid ArticleVo articleVo, BindingResult result, RedirectAttributes attributes) {
     if (result.hasErrors()) {
       attributes.addFlashAttribute("org.springframework.validation.BindingResult.article", result);
       attributes.addFlashAttribute("article", articleVo);
 
-      return "redirect:/articles/article-management/" + id;
+      return "redirect:/articles/management/" + id;
     }
 
     final Article article = articleService.findById(id);
     article.setTitle(articleVo.getTitle());
+    article.setDescription(articleVo.getDescription());
+    article.setQuantity(articleVo.getQuantity());
     article.setPrice(articleVo.getPrice());
 
     articleService.save(article);
-    return "redirect:/articles/article-management?success";
+    return "redirect:/articles/management?success";
   }
 
-  @GetMapping("article-management/delete/{id}")
+  @DeleteMapping("management/{id}")
   public String delete(@PathVariable Long id) {
-    // TODO check if the article is already in cart
+    if (orderService.existsByArticleId(id)) {
+      return "redirect:/articles/management?alreadyOrdered";
+    }
     articleService.deleteById(id);
-    return "redirect:/articles/article-management?delete";
+    return "redirect:/articles/management?delete";
   }
 
-  @PostMapping("article-management")
+  @PostMapping("management")
   public String save(@ModelAttribute("article") @Valid ArticleVo articleVo, BindingResult result, RedirectAttributes attributes) {
     final Optional<Article> optional = articleService.findByReference(articleVo.getReference());
     if (optional.isPresent()) {
@@ -94,13 +136,23 @@ public class ArticleController {
       attributes.addFlashAttribute("org.springframework.validation.BindingResult.article", result);
       attributes.addFlashAttribute("article", articleVo);
 
-      return "redirect:/articles/article-management?new";
+      return "redirect:/articles/management?new";
     }
 
     final Article article = modelMapper.map(articleVo, Article.class);
     articleService.save(article);
 
-    return "redirect:/articles/article-management?success";
+    return "redirect:/articles/management?success";
+  }
+
+  @GetMapping("{id}")
+  public String details(@PathVariable Long id, Model model) {
+    final Article article = articleService.findById(id);
+    final ArticleVo result = modelMapper.map(article, ArticleVo.class);
+
+    model.addAttribute("article", result);
+
+    return "articles/details";
   }
 
 }

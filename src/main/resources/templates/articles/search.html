@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+  <link rel="stylesheet" th:href="@{/css/application.css}"/>
+  <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+  <script th:src="@{/js/alpine.min.js}" defer></script>
+  <title>CIGMA Shop - Gestion des articles</title>
+</head>
+<body class="overflow-y-hidden">
+<div class="min-h-screen flex flex-col">
+  <div class="flex flex-col flex-grow" x-data="{ isMobileMenuOn: false }">
+    <div th:replace="fragments/navbar :: navbar(menu = 1)"></div>
+    <div th:replace="fragments/header :: header(title = 'Recherche des articles')"></div>
+    <main class="flex flex-col flex-grow items-center bg-gray-50">
+      <div class="flex-grow bg-white max-w-6xl w-full h-64 mx-auto p-8 overflow-y-auto">
+        <div>
+          <form class="w-full flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4"
+                th:action="@{/articles/search}" method="POST"
+                th:object="${search}"
+          >
+            <div>
+              <label for="contains" class="sr-only">Contient</label>
+              <input id="contains" name="contains" type="text" autocomplete="contains"
+                     placeholder="Contient" th:field="*{contains}"
+                     class="appearance-none rounded-md shadow-sm block w-full h-10 p-3 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-red-500 focus:border-red-500"
+              >
+            </div>
+            <div>
+              <label for="start" class="sr-only">Commence avec</label>
+              <input id="start" name="start" type="text" autocomplete="start"
+                     placeholder="Commence avec" th:field="*{start}"
+                     class="appearance-none rounded-md shadow-sm block w-full h-10 p-3 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-red-500 focus:border-red-500"
+              >
+            </div>
+            <div>
+              <label for="end" class="sr-only">Termine par</label>
+              <input id="end" name="end" type="text" autocomplete="end"
+                     placeholder="Termine par" th:field="*{end}"
+                     class="appearance-none rounded-md shadow-sm block w-full h-10 p-3 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-red-500 focus:border-red-500"
+              >
+            </div>
+            <div>
+              <button class="block w-full bg-red-600 hover:bg-red-700 text-white rounded-md h-10 px-8" type="submit">
+                Chercher
+              </button>
+            </div>
+          </form>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
+          <div th:each="article: ${articles}" class="border border-gray-200 rounded-sm">
+            <div class="p-4 bg-gray-100">
+              <a class="font-semibold text-gray-700" th:href="@{/articles/{id} (id = ${article.id})}"
+                 th:text="${article.reference}"></a>
+            </div>
+            <div class="truncate text-gray-900 p-4" th:text="${article.title}"></div>
+            <div class="flex justify-between text-right p-4">
+              <div
+                  class="text-red-600 hover:bg-red-600 hover:text-white rounded-md text-sm flex items-center space-x-2 p-1">
+                <a th:href="@{/articles/{id} (id = ${article.id})}">Details</a>
+              </div>
+              <span class="bg-green-400 text-white rounded-md p-1 text-sm" th:text="${article.price}"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+  <div th:replace="fragments/footer :: simple"></div>
+</div>
+</body>
+</html>
