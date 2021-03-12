@@ -1,0 +1,27 @@
+version: '2.1'
+
+services:
+  cigma-shop-db:
+    image: mariadb
+    restart: always
+    volumes:
+    - /data/cigma-shop/mysql:/var/lib/mysql
+    environment:
+    - MYSQL_ROOT_PASSWORD=root
+    networks:
+    - cigma-shop-network
+    expose:
+    - "3306"
+  cigma-shop:
+    image: cigma_shop
+    build:
+      context: ./
+      dockerfile: ./Dockerfile
+    restart: always
+    networks:
+    - cigma-shop-network
+    ports:
+    - "80:8080"
+networks:
+  cigma-shop-network:
+    driver: bridge
