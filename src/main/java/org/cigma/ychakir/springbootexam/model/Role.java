@@ -9,10 +9,10 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Data
-@Table
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
+@Table(name = "roles")
 @EqualsAndHashCode(callSuper = true)
 public class Role extends BaseModel {
 

@@ -1,10 +1,23 @@
+delete
+from users_roles;
+delete
+from orders;
+delete
+from mails;
+delete
+from articles;
+delete
+from roles;
+delete
+from users;
+
 -- roles
-INSERT INTO role (name)
+INSERT INTO roles (name)
 VALUES ('ADMIN'),
        ('CLIENT');
 
 -- users
-INSERT INTO user (city, email, full_name, password, tel, username)
+INSERT INTO users (city, email, full_name, password, tel, username)
 VALUES ('Casablanca',
         'admin@cigma.ecommerce.org',
         'Admin Admin',
@@ -19,10 +32,8 @@ VALUES ('Casablanca',
         'client');
 
 -- user roles
-INSERT INTO user_roles (user_id, roles_id)
-VALUES ((SELECT ID FROM user WHERE username = 'admin'), (SELECT ID FROM role WHERE name = 'ADMIN')),
-       ((SELECT ID FROM user WHERE username = 'client'), (SELECT ID FROM role WHERE name = 'CLIENT'));
+INSERT INTO users_roles (user_id, roles_id)
+VALUES ((SELECT ID FROM users WHERE username = 'admin'), (SELECT ID FROM roles WHERE name = 'ADMIN')),
+       ((SELECT ID FROM users WHERE username = 'client'), (SELECT ID FROM roles WHERE name = 'CLIENT'));
 
 -- articles
-INSERT INTO article (price, reference, title)
-VALUES (1212, '8EUUF99E0', 'Article de test');

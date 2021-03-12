@@ -15,17 +15,17 @@
         </div>
         <div class="hidden md:block">
           <div class="ml-10 flex items-baseline space-x-4">
-            <a th:if="${menu == 1}" href="#"
+            <a th:if="${menu == 1}" th:href="@{/articles/search}"
                class="bg-red-600 hover:bg-red-700 text-white px-3 py-2 rounded-md text-sm font-medium">Recherche
               des articles</a>
-            <a th:if="${menu != 1}" href="#"
+            <a th:if="${menu != 1}" th:href="@{/articles/search}"
                class="text-gray-600 hover:bg-red-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Recherche
               des articles</a>
 
-            <a th:if="${menu == 2}" th:href="@{/articles/article-management}"
+            <a th:if="${menu == 2}" th:href="@{/articles/management}"
                class="bg-red-600 hover:bg-red-700 text-white px-3 py-2 rounded-md text-sm font-medium"
                sec:authorize="hasAuthority('ADMIN')">Gestion des articles</a>
-            <a th:if="${menu != 2}" th:href="@{/articles/article-management}"
+            <a th:if="${menu != 2}" th:href="@{/articles/management}"
                class="text-gray-600 hover:bg-red-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
                sec:authorize="hasAuthority('ADMIN')">Gestion des articles</a>
           </div>
@@ -33,11 +33,11 @@
       </div>
       <div class="hidden md:block">
         <div class="ml-4 flex items-center md:ml-6">
-          <button
-              class="w-8 h-8 bg-white-800 p-1 rounded-full text-gray-400 hover:text-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
+          <a th:href="@{/orders/cart}"
+             class="w-8 h-8 bg-white-800 p-1 rounded-full text-gray-400 hover:text-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
             <span class="sr-only">Shopping bag</span>
             <img th:src="@{/heroicons/outline/shopping-bag.svg}" alt="Logo">
-          </button>
+          </a>
           <!-- Profile dropdown -->
           <div x-data="{ isUserMenuOpen: false }" class="ml-3 relative">
             <div>
@@ -46,9 +46,12 @@
                   id="user-menu" aria-haspopup="true" @click.away="isUserMenuOpen = false"
                   @click="isUserMenuOpen = !isUserMenuOpen">
                 <span class="sr-only">Open user menu</span>
-                <img class="h-8 w-8 rounded-full"
-                     src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                     alt="">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
+                     class="h-8 w-8 rounded-full">
+                  <path fill-rule="evenodd"
+                        d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z"
+                        clip-rule="evenodd"/>
+                </svg>
               </button>
             </div>
             <div
@@ -88,28 +91,39 @@
 
   <div :class="{'block': isMobileMenuOn, 'hidden': !isMobileMenuOn }" class="md:hidden">
     <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-      <a href="#" class="bg-red-700 text-white block px-3 py-2 rounded-md text-base font-medium">Recherche des
+      <a th:if="${menu == 1}" th:href="@{/articles/search}"
+         class="bg-red-700 text-white block px-3 py-2 rounded-md text-base font-medium">Recherche des
+        articles</a>
+      <a th:if="${menu != 1}" th:href="@{/articles/search}"
+         class="text-gray-600 hover:bg-red-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Recherche
+        des
         articles</a>
 
-      <a href="#"
+      <a th:if="${menu == 2}" th:href="@{/articles/management}"
+         class="bg-red-700 text-white block px-3 py-2 rounded-md text-base font-medium"
+         sec:authorize="hasAuthority('ADMIN')">Gestion des articles</a>
+      <a th:if="${menu != 2}" th:href="@{/articles/management}"
          class="text-gray-600 hover:bg-red-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
          sec:authorize="hasAuthority('ADMIN')">Gestion des articles</a>
     </div>
     <div class="pt-4 pb-3 border-t border-gray-700">
       <div class="flex items-center px-5">
         <div class="flex-shrink-0">
-          <img class="h-10 w-10 rounded-full"
-               src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-               alt="">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
+               class="h-10 w-10 rounded-full">
+            <path fill-rule="evenodd"
+                  d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z"
+                  clip-rule="evenodd"/>
+          </svg>
         </div>
         <div class="ml-3">
           <div class="text-sm font-medium leading-none text-gray-400" sec:authentication="name">Username</div>
         </div>
-        <button
-            class="ml-auto bg-white-800 flex-shrink-0 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
+        <a th:href="@{/orders/cart}"
+           class="ml-auto bg-white-800 flex-shrink-0 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
           <span class="sr-only">Shopping bag</span>
           <img class="h-6 w-6" th:src="@{/heroicons/outline/shopping-bag.svg}">
-        </button>
+        </a>
       </div>
       <div class="mt-3 px-2 space-y-1">
         <a th:href="@{/users/change-password}"

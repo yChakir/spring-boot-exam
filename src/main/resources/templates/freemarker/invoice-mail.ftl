@@ -9,7 +9,7 @@
     style="margin: auto; border: none; border-collapse: collapse; min-height: 40vh; background-color: white; align-items: center; justify-content: center;">
   <tr>
     <td style="background-color: rgba(185, 28, 28, 1); color: rgba(255, 255, 255, 1); text-align: center; font-size: 1.875rem; line-height: 2.25rem; font-weight: 700; padding: 2rem; border-top-left-radius: 0.375rem; border-top-right-radius: 0.375rem;">
-      Bienvenu !
+      Félicitation !
     </td>
   </tr>
   <tr>
@@ -20,27 +20,7 @@
   <tr>
     <td>
       <div style="padding: 1rem; padding-top: 2rem; padding-bottom: 2rem; color: rgba(55, 65, 81, 1);">
-        Merci d'avoir rejoint CIGMA Shop, pour que vous puissiez s'authentifier à notre boutique veuillez utiliser les
-        identifiants ci-dessous.
-
-        <table style="padding-top: 2rem;">
-          <tr>
-            <td>
-              <div style="color: rgba(17, 24, 39, 1); padding: 0.5rem; font-weight: 700;">Nom d'utilisateur :</div>
-            </td>
-            <td>
-              <div style="color: rgba(17, 24, 39, 1); padding: 0.5rem;">${username}</div>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <div style="color: rgba(17, 24, 39, 1); padding: 0.5rem; font-weight: 700;">Mot de passe :</div>
-            </td>
-            <td>
-              <div style="color: rgba(17, 24, 39, 1); padding: 0.5rem;">${password}</div>
-            </td>
-          </tr>
-        </table>
+        Merci pour votre achat, veuillez trouver ci-joint la facture de votre commande.
       </div>
     </td>
   </tr>
@@ -57,12 +37,5 @@
     </td>
   </tr>
 </table>
-<div
-    style=""
-    class="shadow-md">
-
-
-</div>
-
 </body>
 </html>

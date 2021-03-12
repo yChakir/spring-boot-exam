@@ -40,7 +40,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         .csrf().disable()
         .formLogin().loginPage("/passport/login")
         .failureUrl("/passport/login?error=true")
-        .defaultSuccessUrl("/home")
+        .defaultSuccessUrl("/articles/search")
         .usernameParameter("username")
         .passwordParameter("password").and()
         .logout().logoutRequestMatcher(new AntPathRequestMatcher("/passport/logout"))

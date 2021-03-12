@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+<header th:fragment="header" class="bg-white shadow">
+  <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+    <h1 class="text-3xl font-bold text-gray-900" th:text="${title}">
+      Header text
+    </h1>
+  </div>
+</header>
+
+</body>
+</html>
