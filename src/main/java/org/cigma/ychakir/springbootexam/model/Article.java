@@ -2,6 +2,7 @@ package org.cigma.ychakir.springbootexam.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Lob;
 import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -21,6 +22,7 @@ public class Article extends BaseModel {
 
   private String title;
 
+  @Lob
   private String description;
 
   private Long quantity;
