@@ -9,6 +9,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
@@ -35,12 +36,17 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         .antMatchers("/").permitAll()
         .antMatchers("/passport/**").permitAll()
         .antMatchers("/passport/change-password").authenticated()
-        .antMatchers("/home").hasAnyAuthority("ADMIN", "CLIENT")
+        .antMatchers("/articles/management/**").hasAuthority("ADMIN")
         .anyRequest().authenticated().and()
         .csrf().disable()
         .formLogin().loginPage("/passport/login")
         .failureUrl("/passport/login?error=true")
-        .defaultSuccessUrl("/articles/search")
+        .successHandler((httpServletRequest, httpServletResponse, authentication) -> {
+          final boolean isAdmin = authentication.getAuthorities().stream()
+              .map(GrantedAuthority::getAuthority)
+              .anyMatch(s -> s.equals("ADMIN"));
+          httpServletResponse.sendRedirect(isAdmin ? "/articles/management" : "/articles/search");
+        })
         .usernameParameter("username")
         .passwordParameter("password").and()
         .logout().logoutRequestMatcher(new AntPathRequestMatcher("/passport/logout"))
