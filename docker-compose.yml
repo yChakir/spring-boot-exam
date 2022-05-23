@@ -4,8 +4,6 @@ services:
   cigma-shop-db:
     image: mariadb
     restart: always
-    volumes:
-    - /data/cigma-shop/mysql:/var/lib/mysql
     environment:
     - MYSQL_ROOT_PASSWORD=root
     networks:
