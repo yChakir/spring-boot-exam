@@ -52,7 +52,7 @@
   <tr>
     <td style="background-color: rgba(249, 250, 251, 1);">
       <div style="text-align: center; font-size: 0.875rem; line-height: 1.25rem; color: rgba(156, 163, 175, 1);">
-        2021 &copy; CIGMA Shop, Tout droit réservé
+        2022 &copy; CIGMA Shop, Tout droit réservé
       </div>
     </td>
   </tr>
