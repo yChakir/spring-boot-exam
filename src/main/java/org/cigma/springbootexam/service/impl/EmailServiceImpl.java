@@ -25,6 +25,7 @@ import org.cigma.springbootexam.model.Order;
 import org.cigma.springbootexam.repository.EmailRepository;
 import org.cigma.springbootexam.service.EmailService;
 import org.cigma.springbootexam.utils.ExcelFile;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.event.EventListener;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -41,6 +42,9 @@ public class EmailServiceImpl implements EmailService {
   private final EmailRepository emailRepository;
 
   private final Configuration freeMarkerConfiguration;
+
+  @Value("${spring.mail.username}")
+  private String from;
 
   @Override
   @EventListener
@@ -133,6 +137,7 @@ public class EmailServiceImpl implements EmailService {
       mail.setContent(html);
       mail.setSent(true);
 
+      helper.setFrom(from);
       helper.setTo(mail.getReceiver());
       helper.setSubject(mail.getSubject());
       helper.setText(html, true);
